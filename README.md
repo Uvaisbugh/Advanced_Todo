@@ -1,4 +1,5 @@
 # Todo List Application
+![Todo List Screenshot](![Todo List Screenshot](https://github.com/yourusername/todo-list/blob/main/todo_screenshot.png?raw=true)?raw=true)
 
 ## Project Overview
 
