@@ -1,0 +1,38 @@
+#list1 .form-control {
+    border-color: transparent;
+  }
+  #list1 .form-control:focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+  #list1 .select-input.form-control[readonly]:not([disabled]) {
+    background-color: #fbfbfb;
+  }
+  .head {
+    padding-top: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-family: fantasy;
+  }
+  .welcome {
+   font-family: 'Times New Roman', Times, serif;
+  }
+  .datepicker{
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    border-radius: 4px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all .3s ease;
+    width: 180px;
+    color: #333;
+    text-align: center;
+
+  }
+.bg-l { background-color: lightblue; }
+.bg-m { background-color: yellow; }
+.bg-h { background-color: red; }

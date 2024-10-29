@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/sign.css" %}">
+{% endblock css %}
+
+{% block title %}Signin | Login {% endblock title %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title login">Login Form</div>
+        <div class="title signup">Signup Form</div>
+    </div>
+    <div class="form-container">
+        <div class="slide-controls">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">Login</label>
+            <label for="signup" class="slide signup">Signup</label>
+            <div class="slider-tab"></div>
+        </div>
+        
+        <!-- Display Messages for Both Forms -->
+         {% include "login.html" %}
+        
+            <!-- Signup Form -->
+            <form action="{% url "sign" %}" method="POST" class="signup">
+                {% csrf_token %}
+                <div class="field">
+                    <input type="text" placeholder="User name" required name="name">
+                </div>
+                <div class="field">
+                    <input type="text" placeholder="Email Address" required name="email">
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="Password" required name="password">
+                </div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="Signup">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="{% static "js/sign.js" %}"></script>
+{% endblock body %}

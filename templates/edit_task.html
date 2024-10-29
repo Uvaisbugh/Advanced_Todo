@@ -1,0 +1,39 @@
+<!-- edit_task.html -->
+{% extends "base.html" %}
+{% block title %}Edit Task{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <h2>Edit Task</h2>
+    <form method="post" action="{% url 'edit_task' task.id %}">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ task.title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="due_date">Due Date</label>
+            <input type="date" class="form-control" id="due_date" name="due_date" value="{{ task.due_date|date:'Y-m-d' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="priority">Priority</label>
+            <select class="form-select" id="priority" name="priority">
+                <option value="L" {% if task.priority == 'L' %}selected{% endif %}>Low</option>
+                <option value="M" {% if task.priority == 'M' %}selected{% endif %}>Medium</option>
+                <option value="H" {% if task.priority == 'H' %}selected{% endif %}>High</option>
+            </select>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="completed" name="completed" {% if task.completed %}checked{% endif %}>
+            <label for="completed" class="form-check-label">Completed</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

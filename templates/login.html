@@ -1,0 +1,24 @@
+{% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="form-inner">
+            <!-- Login Form -->
+            <form action="{% url "login" %}" method="POST" class="login">
+                {% csrf_token %}
+                <div class="field">
+                    <input type="text" placeholder="Username" required name="log_name">
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="Password" required name="log_password">
+                </div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="Login">
+                </div>
+                <div class="signup-link">Not a member? <a href="javascript:void(0)" onclick="document.getElementById('signup').checked = true;">Signup now</a></div>
+            </form>

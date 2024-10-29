@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}To-do list{% endblock title %}
+
+{% block body %}
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+                    <div class="card-body py-4 px-4 px-md-5"><a href="{% url "signout" %}">
+                        <button  type="submit" class="btn btn-danger ms-2">Logout</button></a>
+                        <div class="head page-header">
+                            <h1 class="page-header">✅ My Todo List</h1>
+                        </div>
+
+                        {% if messages %}
+                            <div class="messages">
+                                {% for message in messages %}
+                                    <div class="alert {{ message.tags }}">{{ message }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <p class="welcome"> User : {{ user|title }} </p>
+
+                        <!-- Add Task Form -->
+                        <div class="pb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <form action="" method="POST">
+                                            {% csrf_token %}
+                                            <input type="text" class="form-control form-control-lg" required name="title" placeholder="Add new task...">
+                                            <input type="date" name="due_date" required placeholder="Due date" class="form-control">
+                                            <select name="priority" class="form-control">
+                                                <option value="L">Low</option>
+                                                <option value="M" selected>Medium</option>
+                                                <option value="H">High</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-primary ms-2">Add Task</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Task List -->
+                        <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
+                            <p class="small mb-0 me-2 text-muted">Sort by:</p>
+                            <form method="get" action="{% url 'home' %}">
+                                <select name="sort" onchange="this.form.submit()" class="form-select">
+                                    <option value="created" {% if sort_option == 'created' %}selected{% endif %}>Created Date</option>
+                                    <option value="due_date" {% if sort_option == 'due_date' %}selected{% endif %}>Due Date</option>
+                                    <option value="priority" {% if sort_option == 'priority' %}selected{% endif %}>Priority</option>
+                                    <option value="completed" {% if sort_option == 'completed' %}selected{% endif %}>Status</option>
+                                </select>
+                            </form>
+                        </div>
+                        
+                        <ul class="list-group list-group-flush">
+                            {% for task in tasks %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ task.title }}</strong>
+                                    <span class="badge bg-{{ task.priority|lower }} ms-2">{{ task.get_priority_display }}</span>
+                                    {% if task.completed %}
+                                        <span class="badge bg-success ms-2">Completed</span>
+                                    {% else %}
+                                        <span class="badge bg-warning ms-2">Pending</span>
+                                    {% endif %}
+                                    <p class="small text-muted">Due: {{ task.due_date|date:"F d, Y" }}</p>
+                                </div>
+
+                                <!-- Task Actions -->
+                                <div class="btn-group">
+                                    <form action="{% url 'toggle_complete' task.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-success">
+                                            {% if not task.completed %}
+                                                Mark as Completed
+                                            {% else %}
+                                                Mark as Pending
+                                            {% endif %}
+                                        </button>
+                                        
+                                    </form>
+                                    <form action="{% url 'delete_task' task.id %}" method="POST" class="ms-1">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    </form>
+                                </div>
+                            </li>
+                            {% empty %}
+                            <li class="list-group-item text-center">
+                                <em>No tasks found.</em>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}
