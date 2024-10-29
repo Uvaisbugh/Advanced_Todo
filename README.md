@@ -1,4 +1,6 @@
 # Todo List Application
+![Todo List Screenshot](https://github.com/Uvaisbugh/ToDo_list/blob/main/static/todoscrn.png?raw=true)
+
 
 ## Project Overview
 
