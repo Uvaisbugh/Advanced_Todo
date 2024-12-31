@@ -38,4 +38,3 @@ To run the application locally:
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/todo-list.git
-   cd todo-list
