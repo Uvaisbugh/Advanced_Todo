@@ -1,7 +1,7 @@
 # X01
 # Todo List Application 
-![Todo List Screenshot](https://github.com/Uvaisbugh/ToDo_advanced/blob/main/Advanced_todo/static/todoscrn.png?raw=true)
-![Todo List Screenshot](https://github.com/Uvaisbugh/ToDo_advanced/blob/main/Advanced_todo/static/map.jpeg?raw=true)
+![Todo List Screenshot](https://github.com/Uvaisbugh/ToDo_advanced/blob/main/todo_list/static/todoscrn.png?raw=true)
+![Todo List Screenshot](https://github.com/Uvaisbugh/ToDo_advanced/blob/main/todo_list/static/map.jpeg?raw=true)
 
 ## Project Overview
 
