@@ -2,10 +2,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
 from .models import Todo_model
-from . import models
 from django.contrib.auth import authenticate, login as auth_login,logout as auth_logout
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
+# Create your views here.
 def signup(request):
     if request.method == 'POST':
         # Get the signup form data
@@ -32,16 +33,7 @@ def signup(request):
     
     return render(request, 'signup_login.html')
 
-
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from . import models
-from django.utils import timezone
-
-from django.shortcuts import render
-from django.contrib import messages
-from .models import Todo_model
-
+@login_required(login_url='login')
 def homepage(request):
     # Get the sorting option from GET request
     sort_option = request.GET.get('sort', 'created')  # Default sorting is by 'created' date
@@ -108,7 +100,7 @@ def loginn(request):
 
     return render(request, 'signup_login.html')
 
-
+@login_required(login_url='login')
 def toggle_complete(request, task_id):
     # Retrieve the task by ID and ensure it belongs to the current user
     task = get_object_or_404(Todo_model, id=task_id, user=request.user)
@@ -126,6 +118,7 @@ def toggle_complete(request, task_id):
     # Redirect back to the home page
     return redirect('home')
 
+@login_required(login_url='login')
 def delete_task(request, task_id):
     # Retrieve the task by ID and ensure it belongs to the current user
     task = get_object_or_404(Todo_model, id=task_id, user=request.user)
@@ -144,6 +137,7 @@ def signout(request):
     messages.success(request, 'Logged out successfully.')
     return redirect('login')
 
+@login_required(login_url='login')
 def edit_task(request, task_id):
     task = get_object_or_404(Todo_model, id=task_id, user=request.user)
 

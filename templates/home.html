@@ -13,6 +13,7 @@
                         <button  type="submit" class="btn btn-danger ms-2">Logout</button></a>
                         <div class="head page-header">
                             <h1 class="page-header">✅ My Todo List</h1>
+                            <p class="welcome"> User : {{ user|title }} </p>
                         </div>
 
                         {% if messages %}
@@ -22,8 +23,6 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
-
-                        <p class="welcome"> User : {{ user|title }} </p>
 
                         <!-- Add Task Form -->
                         <div class="pb-2">
